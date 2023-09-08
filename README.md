@@ -22,9 +22,10 @@ docker push <ACCOUNT>.dkr.ecr.us-east-1.amazonaws.com/coworking-repository:0.1.0
 ```
 3. **AWS CodeBuild Pipeline:** configure a build pipeline using AWS CodeBuild to build and push the Docker image into AWS ECR with `buildspec.yml` file defining building steps.
 4. **EKS Deployment:** deploy changes to Kubernetes cluster with `kubectl apply -f deployment/` command. This will make the API available within the cluster.
+5. **API Logs:** verify the deployment with `kubectl logs <POD_NAME>` or the corresponding logs in AWS CloudWatch.
 
 ## Further Release process
 1. Commit your code changes to the GitHub repository.
-2. Automatically trigger the AWS CodeBuild pipeline on GitHub `push` action to build and push a new Docker image to AWS ECR. Image is built and pushed with an `$IMAGE_TAG` defined as an environment variable in the AWS CodeBuild configuration.
+2. Automatically trigger the AWS CodeBuild pipeline on GitHub `push` action to build and push a new Docker image to AWS ECR. Image is built and pushed with an `$IMAGE_TAG` defined as an environment variable in the AWS CodeBuild configuration so it should be changed accordingly.
 3. Update the Kubernetes deployment files with the new image tag to apply the latest changes to the EKS cluster. Use the kubectl `kubectl apply -f deployment/` command.
 4. Monitor the deployment and application logs in AWS CloudWatch.
